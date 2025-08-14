@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WDD133 - Project</title>
+  <meta name="description" content="WDD133 - Final Project">
+  <meta name="author" content="Fong King Leong">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/base.css">
+  <script src="scripts/getdates.js" defer></script>
+  <script src="scripts/form.js" defer></script>
+
+</head>
+
+<body>
+
+  <div id="Home" class="tabcontent">
+    <a id="logo_link" href="index.html">
+      <img class="logo" src="images/marsrover.png" alt="funlife Logo">
+      <h1 id="Fun">Mars fans</h1>
+      <p id="Fun">Welcome to Mars fans page.</p>
+  </div>
+
+  <div id="About" class="tabcontent">
+    <h1>About Me</h1>
+    <p>Learn more about me.</p>
+  </div>
+
+  <div id="Hobbies" class="tabcontent">
+    <h1>Hobbies</h1>
+    <p>Get to know more about my Hobbies.</p>
+  </div>
+
+  <div id="Contact" class="tabcontent">
+    <h1>Contact me</h1>
+    <p>If you want to be my friend, please contact me.</p>
+  </div>
+
+  <button class="tablink" onclick="openCity('Home', this, '#219ebc')" id="defaultOpen"><a href="index.html">Home</a></button>
+  <button class="tablink" onclick="openCity('About', this, '#4682B4')"><a href="rover.html">Rover</a></button>
+  <button class="tablink" onclick="openCity('Hobbies', this, '#fb8500')"><a href="orbiter.html">Orbiter</a></button>
+  <button class="tablink" onclick="openCity('Contact', this, '#ffb703')"><a href="siteplan.html">Site Plan</a></button>
+
+  <script>
+    function openCity(cityName, elmnt, color) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablink");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].style.backgroundColor = "";
+      }
+      document.getElementById(cityName).style.display = "block";
+      elmnt.style.backgroundColor = color;
+
+    }
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+  </script>
+
+  <div class="hero-image">
+    <div class="hero-text">
+      <h1 style="font-size:50px">Welcome to Mars</h1>
+      <button><a href="https://www.youtube.com/watch?v=ER6EO4B7V68&t=53s">click here</a></button>
+    </div>
+  </div>
+  <h2></h2>
+  <p></p>
+  <br>
+  <div class="column">
+    <div class="card">
+      <img src="images/nasa-logo.png" alt="Nasa logo" style="width:100%">
+      <div class="container">
+        <h2>Nasa</h2>
+        <p class="title" href="https://www.nasa.gov/"></p>
+        <p>NASA website</p>
+        <p></p>
+        <p><button class="button"><a href="https://www.nasa.gov/">click here</a></button></p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="column">
+    <div class="card">
+      <img src="images/cnsa-logo.png" alt="cnsa logo" style="width:75%">
+      <div class="container">
+        <h2>Cnsa</h2>
+        <p class="title">Cnsa website</p>
+        <p></p>
+        <p></p>
+        <p><button class="button"><a href="https://www.cnsa.gov.cn/">click here</a></button></p>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <div class="card">
+        <img src="images/esa-logo.png" alt="Esa logo" style="width:90%">
+        <div class="container">
+          <h2>Esa</h2>
+          <p class="title">Esa website</p>
+          <p></p>
+          <p></p>
+          <p><button class="button"><a href="https://www.esa.int/">chick here</a></button></p>
+        </div>
+      </div>
+    </div>
+  </div>
+    <footer>
+        <P class="copyright">&copy;2023 <span id="currentdate"></span> | Thomas Fong | Hong Kong</P>
+        <P class="lastModified"><span id="lastModified"></span></P>
+    </footer>
+</body>
+</html>
