@@ -1,540 +1,166 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>曾火星登陆器</title>
-    <meta name="description" content="火星探测器历史展示系统">
+    <meta name="description" content="WDD133 - Final Project">
     <meta name="author" content="Fong King Leong">
+    <title>Mars Rovers Gallery</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
-    <style>
-        /* Base View for Site */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        h1, h2, footer p{
-            font-family: "Orbitron", sans-serif;
-        }
-
-        body {
-            font-family: "Roboto", sans-serif;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            color: #e6e6e6;
-            min-height: 100vh;
-        }
-
-        header {
-            display: block;
-            padding: 1.5em;
-            margin: 0 auto;
-            background: rgba(0, 10, 30, 0.8);
-            border-bottom: 2px solid #00ccff;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        header h1 {
-            display: block;
-            color: #00ccff;
-            text-align: center;
-            text-shadow: 0 0 10px rgba(0, 204, 255, 0.7);
-            letter-spacing: 2px;
-            font-size: 2.5rem;
-        }
-
-        header h1.noShow {
-            display: none;
-        }
-
-        #hamButton {
-            display: block;
-            padding: 0.5em;
-            width: 50px;
-            position: absolute;
-            right: 1rem;
-            top: 1.5rem;
-            font-size: larger;
-            background: rgba(0, 102, 255, 0.3);
-            color: #00ccff;
-            border: 1px solid #00ccff;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        #hamButton::before {
-            content: "☰";
-        }
-
-        #hamButton.open::before {
-            content: "X";
-        }
-
-        nav {
-            display: none;
-            margin-top: 0;
-            background: rgba(0, 30, 60, 0.95);
-            border-bottom: 2px solid #00ccff;
-        }
-
-        nav.open {
-            display: block;
-            margin-top: 1em;
-        }
-
-        nav ul{
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 0;
-        }
-
-        nav ul li {
-            display: block;
-            width: 100%;
-            text-align: center;
-        }
-
-        nav a {
-            display: block;
-            color: #00ccff;
-            text-decoration: none;
-            font-size: 1.1rem;
-            padding: 1rem;
-            flex: 1 1 100%;
-            transition: all 0.3s ease;
-        }
-
-        .active {
-            background: rgba(0, 102, 255, 0.3);
-            font-weight: bold;
-        }
-
-        nav a:hover {
-            background: rgba(0, 102, 255, 0.5);
-            color: white;
-        }
-
-        main {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 1em;
-        }
-
-        main h2 {
-            text-align: center;
-            margin: 1.5em 0;
-            color: #00ccff;
-            font-size: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .container {
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-gap: 30px;
-            place-items: center;
-        }
-
-        .container div {
-            text-align: center;
-            background: rgba(30, 30, 60, 0.7);
-            padding: 1.5em;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 204, 255, 0.3);
-            border: 1px solid #00ccff;
-            transition: transform 0.3s ease;
-            width: 90%;
-            max-width: 400px;
-        }
-
-        .container div:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 0 30px rgba(0, 204, 255, 0.5);
-        }
-
-        .container div strong {
-            font-size: 1rem;
-            color: #00ccff;
-        }
-
-        .container div h3 {
-            margin-bottom: 0.8em;
-            color: #00ffcc;
-            font-size: 1.5rem;
-        }
-
-        .container div p {
-            margin: 0.5em 0;
-            font-size: 1.1rem;
-        }
-
-        .container div img {
-            margin-top: 1em;
-            width: 100%;
-            height: auto;
-            border: 1px solid #00ccff;
-            border-radius: 5px;
-            background-color: #000;
-            animation: fade 1.5s;
-        }
-
-        footer {
-            background: rgba(0, 10, 30, 0.9);
-            text-align: center;
-            color: #00ccff;
-            font-size: 1.1rem;
-            font-weight: bold;
-            padding: 1.5em 0;
-            border-top: 2px solid #00ccff;
-            margin-top: 2rem;
-        }
-
-        @keyframes fade {
-            0% {
-                opacity: 0;
-            }
-
-            100% {
-                opacity: 1;
-            }
-        }
-
-        .hero {
-            text-align: center;
-            padding: 3em 1em;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23000b1a"/><circle cx="20" cy="20" r="1" fill="%23ffffff" opacity="0.7"/><circle cx="50" cy="30" r="1" fill="%23ffffff" opacity="0.7"/><circle cx="80" cy="10" r="2" fill="%23ffffff" opacity="0.7"/><circle cx="40" cy="70" r="1" fill="%23ffffff" opacity="0.7"/><circle cx="70" cy="50" r="1" fill="%23ffffff" opacity="0.7"/><circle cx="10" cy="90" r="1" fill="%23ffffff" opacity="0.7"/><circle cx="90" cy="80" r="2" fill="%23ffffff" opacity="0.7"/></svg>');
-            border-radius: 10px;
-            margin: 2rem auto;
-            max-width: 1200px;
-            border: 1px solid #00ccff;
-            box-shadow: 0 0 30px rgba(0, 204, 255, 0.2);
-        }
-
-        .hero h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #00ffcc;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            line-height: 1.6;
-        }
-
-        /* Large View for Site */
-        @media screen and (min-width: 750px) {
-            header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-
-            header h1 {
-                display: block;
-                text-align: left;
-                margin-left: 1rem;
-            }
-
-            header h1.noShow {
-                display: block;
-            }
-
-            #hamButton {
-                display: none;
-            }
-
-            nav {
-                display: block;
-                background: transparent;
-                border: none;
-            }
-
-            nav.open {
-                display: block;
-                margin-top: 0;
-            }
-
-            nav ul{
-                flex-direction: row;
-                justify-content: flex-end;
-            }
-
-            nav ul li {
-                width: auto;
-            }
-
-            .container {
-                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            }
-            
-            .hero {
-                padding: 4em;
-            }
-            
-            .hero h2 {
-                font-size: 3rem;
-            }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/orbiter.css">
+    <script src="scripts/getdates.js" defer></script>
+    <script src="scripts/index.js" defer></script>
 </head>
 <body>
-    <header>
-        <h1 class="headerText">曾火星登陆器</h1>
-        <button type="button" aria-label="Open and Close Nav" id="hamButton"></button>
-        <nav class="navigation">
-            <ul>
-                <li>
-                    <a id="home" class="active">
-                        首页
-                    </a>
-                </li>
-                <li>
-                    <a id="old">
-                        早期型号
-                    </a>
-                </li>
-                <li>
-                    <a id="new">
-                        现代型号
-                    </a>
-                </li>
-                <li>
-                    <a id="large">
-                        大型登陆器
-                    </a>
-                </li>
-                <li>
-                    <a id="small">
-                        小型登陆器
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </header>
-    
-    <main>
-        <div class="hero">
-            <h2>火星探索的壮丽历程</h2>
-            <p>从20世纪60年代至今，人类已向火星发送了数十个探测器。这些工程奇迹在红色星球表面着陆，为我们揭示了火星的神秘面纱，改变了我们对这颗邻近行星的认识。</p>
+  <header>
+      <div class="logo-container">
+      <img src="images/marsrover.png" alt="Mars Exploration Logo" class="logo">
+      <h1>Mars Exploration</h1>
+    </div>
+    <button id="menu">≡</button>
+    <nav class="navigation">
+      <a href="index.html">Home</a>
+      <a href="rover.html" class="active">Rovers</a>
+      <a href="orbiter.html">Orbiters</a>
+      <a href="agencies.html">Space Agencies</a>
+    </nav>
+  </header>
+  
+  <div class="hero">
+    <div class="hero-content">
+      <h2>Exploring Mars Surface</h2>
+      <p>Since the 1990s, humans have sent robotic rovers to traverse Mars. These mobile laboratories have explored the Martian terrain, conducted experiments, and revealed secrets about the Red Planet's geology, climate, and potential for life.</p>
+    </div>
+  </div>
+  
+  <main>
+    <h2>Mars Rovers</h2>
+    <div class="img-grid">
+      <!-- Rover 1 -->
+      <div class="satellite-card">
+        <img src="https://th.bing.com/th/id/OIP.6F0X3jX3JZ3Q4Z4Q4Z4Z4QHaEK?rs=1&pid=ImgDetMain" alt="Sojourner Rover">
+        <div class="satellite-info">
+          <h3>Sojourner</h3>
+          <p>NASA's first Mars rover (1997). Part of the Pathfinder mission, this microwave-sized rover proved rovers could operate on Mars, traveling 100 meters in 83 days.</p>
+          <div class="mission-details">
+            <span>USA</span>
+            <span>1997</span>
+          </div>
         </div>
-        
-        <h2 id="page">
-            火星登陆器总览
-        </h2>
-        <div class="container"></div>
-    </main>
-    
-    <footer>    
-        <p> &copy;<span id="currentYear"></span>🚀 火星探索档案 🪐 人类航天成就</p>
-        <p id="lastModified"></p>
-    </footer>
-
-    <script>
-        // 获取DOM元素
-        const hamButton = document.getElementById('hamButton');
-        const headerText = document.querySelector('.headerText');
-        const nav = document.querySelector('.navigation');
-        const landerContainer = document.querySelector('.container');
-        const pageHeader = document.querySelector('#page');
-        const home = document.getElementById('home');
-        const old = document.getElementById('old');
-        const newLander = document.getElementById('new');
-        const large = document.getElementById('large');
-        const small = document.getElementById('small');
-
-        // 火星登陆器数据
-        const landers = [
-          {
-            name: "火星3号 (1971)",
-            location: "火星, 南半球",
-            launchDate: "1971, 5, 28",
-            weight: 1210,
-            imageUrl: "https://images.unsplash.com/photo-1635863138275-d9b332955ce2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80"
-          },
-          {
-            name: "海盗1号 (1976)",
-            location: "火星, 克里斯平原",
-            launchDate: "1975, 8, 20",
-            weight: 576,
-            imageUrl: "https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80"
-          },
-          {
-            name: "探路者号 (1997)",
-            location: "火星, 阿瑞斯谷",
-            launchDate: "1996, 12, 4",
-            weight: 264,
-            imageUrl: "https://images.unsplash.com/photo-1454789476662-53eb23ba5907?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80"
-          },
-          {
-            name: "勇气号 (2004)",
-            location: "火星, 古谢夫环形山",
-            launchDate: "2003, 6, 10",
-            weight: 185,
-            imageUrl: "https://images.unsplash.com/photo-1505506874110-6a7a69069a08?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80"
-          },
-          {
-            name: "机遇号 (2004)",
-            location: "火星, 子午线高原",
-            launchDate: "2003, 7, 7",
-            weight: 185,
-            imageUrl: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80"
-          },
-          {
-            name: "凤凰号 (2008)",
-            location: "火星, 北极区",
-            launchDate: "2007, 8, 4",
-            weight: 350,
-            imageUrl: "https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80"
-          },
-          {
-            name: "好奇号 (2012)",
-            location: "火星, 盖尔环形山",
-            launchDate: "2011, 11, 26",
-            weight: 899,
-            imageUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80"
-          },
-          {
-            name: "洞察号 (2018)",
-            location: "火星, 埃律西昂平原",
-            launchDate: "2018, 5, 5",
-            weight: 358,
-            imageUrl: "https://images.unsplash.com/photo-1505506874110-6a7a69069a08?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80"
-          },
-          {
-            name: "毅力号 (2021)",
-            location: "火星, 耶泽罗撞击坑",
-            launchDate: "2020, 7, 30",
-            weight: 1025,
-            imageUrl: "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80"
-          }
-        ];
-
-        // 创建登陆器展示卡片
-        function createLanderDiv(landerList){
-          landerContainer.replaceChildren();
-
-          for (let i = 0; i < landerList.length; i++) {
-            let name = landerList[i].name;
-            let location = landerList[i].location;
-            let launchDate = landerList[i].launchDate;
-            let weight = landerList[i].weight;
-            let imageUrl = landerList[i].imageUrl;
-
-            let newDiv = document.createElement('div');
-            let newHeader = document.createElement('h3');  
-            let newLocationText = document.createElement('p');
-            let newLaunchDateText = document.createElement('p');
-            let newWeightText = document.createElement('p');
-            let newImg = document.createElement('img');
-
-            newHeader.textContent = name;
-            newLocationText.innerHTML = `<strong>登陆地点:</strong> ${location}`;
-            newLaunchDateText.innerHTML = `<strong>发射日期:</strong> ${launchDate.split(', ')[0]}年`;
-            newWeightText.innerHTML = `<strong>重量:</strong> ${weight} 千克`;
-            newImg.src = imageUrl;
-            newImg.alt = name;
-            newImg.loading = "lazy";
-
-            newDiv.appendChild(newHeader);
-            newDiv.appendChild(newLocationText);
-            newDiv.appendChild(newLaunchDateText);
-            newDiv.appendChild(newWeightText);
-            newDiv.appendChild(newImg);
-
-            landerContainer.appendChild(newDiv);
-          }
-        };
-
-        // 过滤函数
-        function filterSmall(){
-          return landers.filter(lander => lander.weight < 300);
-        };
-
-        function filterLarge(){
-          return landers.filter(lander => lander.weight > 800);
-        };
-
-        function filterOld(){
-          return landers.filter(lander => parseInt(lander.launchDate.split(', ')[0]) < 2000);
-        };
-
-        function filterNew(){
-          return landers.filter(lander => parseInt(lander.launchDate.split(', ')[0]) >= 2000);
-        };
-
-        // 事件监听
-        hamButton.addEventListener('click', () => {
-            nav.classList.toggle('open');
-            hamButton.classList.toggle('open');
-            headerText.classList.toggle('noShow'); 
-        });
-
-        home.addEventListener('click', () => {
-          home.setAttribute('class', 'active');
-          old.setAttribute('class', '');
-          newLander.setAttribute('class', '');
-          large.setAttribute('class', '');
-          small.setAttribute('class', '');
-          pageHeader.textContent = '火星登陆器总览';
-          createLanderDiv(landers);
-        });
-
-        old.addEventListener('click', () => {
-          home.setAttribute('class', '');
-          old.setAttribute('class', 'active');
-          newLander.setAttribute('class', '');
-          large.setAttribute('class', '');
-          small.setAttribute('class', '');
-          pageHeader.textContent = '早期型号 (2000年前)';
-          createLanderDiv(filterOld());
-        });
-
-        newLander.addEventListener('click', () => {
-          home.setAttribute('class', '');
-          old.setAttribute('class', '');
-          newLander.setAttribute('class', 'active');
-          large.setAttribute('class', '');
-          small.setAttribute('class', '');
-          pageHeader.textContent = '现代型号 (2000年后)';
-          createLanderDiv(filterNew());
-        });
-
-        large.addEventListener('click', () => {
-          home.setAttribute('class', '');
-          old.setAttribute('class', '');
-          newLander.setAttribute('class', '');
-          large.setAttribute('class', 'active');
-          small.setAttribute('class', '');
-          pageHeader.textContent = '大型登陆器 (>800kg)';
-          createLanderDiv(filterLarge());
-        });
-
-        small.addEventListener('click', () => {
-          home.setAttribute('class', '');
-          old.setAttribute('class', '');
-          newLander.setAttribute('class', '');
-          large.setAttribute('class', '');
-          small.setAttribute('class', 'active');
-          pageHeader.textContent = '小型登陆器 (<300kg)';
-          createLanderDiv(filterSmall());
-        });
-
-        // 初始化页面
-        createLanderDiv(landers);
-        
-        // 设置页脚日期
-        document.querySelector('#currentYear').textContent = new Date().getFullYear();
-        document.querySelector('#lastModified').textContent = `最后更新: ${new Date().toLocaleDateString()}`;
-    </script>
+      </div>
+      
+      <!-- Rover 2 -->
+      <div class="satellite-card">
+        <img src="https://th.bing.com/th/id/OIP.4Q4Z4Z4Z4Z4Z4Z4Z4Z4Z4QHaEK?rs=1&pid=ImgDetMain" alt="Spirit Rover">
+        <div class="satellite-info">
+          <h3>Spirit</h3>
+          <p>NASA's Mars Exploration Rover (2004-2010). Designed for 90-day mission but operated for 6 years, traveling 7.7 km and finding evidence of past water activity.</p>
+          <div class="mission-details">
+            <span>USA</span>
+            <span>2004-2010</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Rover 3 -->
+      <div class="satellite-card">
+        <img src="https://th.bing.com/th/id/OIP.5R5R5R5R5R5R5R5R5R5R5QHaEK?rs=1&pid=ImgDetMain" alt="Opportunity Rover">
+        <div class="satellite-info">
+          <h3>Opportunity</h3>
+          <p>Spirit's twin rover (2004-2018). Set distance record (45 km) and operated 60x longer than planned. Discovered clay minerals formed in water.</p>
+          <div class="mission-details">
+            <span>USA</span>
+            <span>2004-2018</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Rover 4 -->
+      <div class="satellite-card">
+        <img src="https://th.bing.com/th/id/OIP.7S7S7S7S7S7S7S7S7S7S7QHaEK?rs=1&pid=ImgDetMain" alt="Curiosity Rover">
+        <div class="satellite-info">
+          <h3>Curiosity</h3>
+          <p>Car-sized NASA rover (2012-present). Exploring Gale Crater, it discovered ancient freshwater environments and organic molecules essential for life.</p>
+          <div class="mission-details">
+            <span>USA</span>
+            <span>2012-Present</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Rover 5 -->
+      <div class="satellite-card">
+        <img src="https://th.bing.com/th/id/OIP.8T8T8T8T8T8T8T8T8T8T8QHaEK?rs=1&pid=ImgDetMain" alt="Perseverance Rover">
+        <div class="satellite-info">
+          <h3>Perseverance</h3>
+          <p>NASA's most advanced rover (2021-present). Searching for ancient microbial life, collecting samples for future return to Earth, and testing oxygen production.</p>
+          <div class="mission-details">
+            <span>USA</span>
+            <span>2021-Present</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Rover 6 -->
+      <div class="satellite-card">
+        <img src="https://th.bing.com/th/id/OIP.9U9U9U9U9U9U9U9U9U9U9QHaEK?rs=1&pid=ImgDetMain" alt="Zhurong Rover">
+        <div class="satellite-info">
+          <h3>Zhurong</h3>
+          <p>China's first Mars rover (2021-2022). Part of Tianwen-1 mission, explored Utopia Planitia, studying surface geology and subsurface structure.</p>
+          <div class="mission-details">
+            <span>China</span>
+            <span>2021-2022</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Rover 7 -->
+      <div class="satellite-card">
+        <img src="https://th.bing.com/th/id/OIP.0V0V0V0V0V0V0V0V0V0V0QHaEK?rs=1&pid=ImgDetMain" alt="Rosalind Franklin Rover">
+        <div class="satellite-info">
+          <h3>Rosalind Franklin</h3>
+          <p>ESA's upcoming ExoMars rover. Will drill 2 meters below surface to search for preserved organic material and signs of past life.</p>
+          <div class="mission-details">
+            <span>Europe</span>
+            <span>Planned</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Rover 8 -->
+      <div class="satellite-card">
+        <img src="https://th.bing.com/th/id/OIP.1W1W1W1W1W1W1W1W1W1W1QHaEK?rs=1&pid=ImgDetMain" alt="Mars Sample Fetch Rover">
+        <div class="satellite-info">
+          <h3>Sample Fetch Rover</h3>
+          <p>Future ESA rover (planned 2028). Will collect sample tubes left by Perseverance for return to Earth in Mars Sample Return campaign.</p>
+          <div class="mission-details">
+            <span>Europe</span>
+            <span>Future</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Rover 9 -->
+      <div class="satellite-card">
+        <img src="https://th.bing.com/th/id/OIP.2X2X2X2X2X2X2X2X2X2X2QHaEK?rs=1&pid=ImgDetMain" alt="VIPER Rover">
+        <div class="satellite-info">
+          <h3>VIPER</h3>
+          <p>NASA's lunar rover (planned 2024). While not a Mars rover, its ice-prospecting technology will inform future Mars water-hunting missions.</p>
+          <div class="mission-details">
+            <span>USA</span>
+            <span>2024 (Lunar)</span>
+          </div>
+        </div>
+      </div>
+    </div>  
+  </main>
+  
+  <footer>    
+      <p> &copy;<span id="currentYear"></span>🚀 Fong King Leong 🚀 Hong Kong</p>
+      <p id="lastModified"></p>
+  </footer>
 </body>
 </html>
