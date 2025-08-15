@@ -1,320 +1,320 @@
- * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        :root {
-            --space-blue: #0b3d91;
-            --space-dark: #050a1c;
-            --space-light: #1d2951;
-            --mars-orange: #e27d60;
-            --tech-teal: #41b6e6;
-            --star-white: #f0f8ff;
-        }
-        
-        body {
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, var(--space-dark), var(--space-light));
-            color: var(--star-white);
-            min-height: 100vh;
-            padding-bottom: 2rem;
-            background-image: 
-                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 5px),
-                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 3px),
-                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 4px);
-            background-size: 550px 550px, 350px 350px, 250px 250px;
-            background-position: 0 0, 40px 60px, 130px 270px;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+    :root {
+        --space-blue: #0b3d91;
+        --space-dark: #050a1c;
+        --space-light: #1d2951;
+        --mars-orange: #e27d60;
+        --tech-teal: #41b6e6;
+        --star-white: #f0f8ff;
+    }
+
+    body {
+        font-family: 'Roboto', sans-serif;
+        background: linear-gradient(135deg, var(--space-dark), var(--space-light));
+        color: var(--star-white);
+        min-height: 100vh;
+        padding-bottom: 2rem;
+        background-image: 
+            radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 5px),
+            radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 3px),
+            radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 4px);
+        background-size: 550px 550px, 350px 350px, 250px 250px;
+        background-position: 0 0, 40px 60px, 130px 270px;
+    }
+
+    header {
+        background-color: rgba(11, 61, 145, 0.8);
+        padding: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        backdrop-filter: blur(5px);
+    }
+
+    h1 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 2.5rem;
+        background: linear-gradient(to right, var(--tech-teal), var(--star-white));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 0 0 15px rgba(65, 182, 230, 0.7);
+        letter-spacing: 2px;
+    }
+
+    #menu {
+        display: none;
+        background: var(--space-light);
+        color: var(--star-white);
+        border: 1px solid var(--tech-teal);
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    .navigation {
+        display: flex;
+        gap: 1.5rem;
+        margin-top: 1rem;
+        flex-basis: 100%;
+    }
+
+    .navigation a {
+        color: var(--star-white);
+        text-decoration: none;
+        font-size: 1.1rem;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .navigation a:hover {
+        background: rgba(65, 182, 230, 0.2);
+        transform: translateY(-2px);
+    }
+
+    .navigation a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--tech-teal);
+        transition: width 0.3s ease;
+    }
+
+    .navigation a:hover::after {
+        width: 100%;
+    }
+
+    main {
+        max-width: 1400px;
+        margin: 2rem auto;
+        padding: 0 1.5rem;
+    }
+
+    main h2 {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 2rem;
+        color: var(--tech-teal);
+        text-shadow: 0 0 10px rgba(65, 182, 230, 0.5);
+        position: relative;
+        padding-bottom: 1rem;
+    }
+
+    main h2::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 150px;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, var(--tech-teal), transparent);
+    }
+
+    .img-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    .satellite-card {
+        background: rgba(29, 41, 81, 0.7);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(65, 182, 230, 0.3);
+    }
+
+    .satellite-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(226, 125, 96, 0.4);
+        border-color: var(--mars-orange);
+    }
+
+    .satellite-card img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        display: block;
+        border-bottom: 3px solid var(--tech-teal);
+    }
+
+    .satellite-info {
+        padding: 1.5rem;
+    }
+
+    .satellite-info h3 {
+        color: var(--tech-teal);
+        margin-bottom: 0.5rem;
+        font-size: 1.4rem;
+        font-family: 'Orbitron', sans-serif;
+    }
+
+    .satellite-info p {
+        margin: 0.5rem 0;
+        line-height: 1.5;
+    }
+
+    .mission-details {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(65, 182, 230, 0.3);
+    }
+
+    .mission-details span {
+        background: rgba(65, 182, 230, 0.2);
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+    }
+
+    footer {
+        text-align: center;
+        padding: 2rem;
+        margin-top: 3rem;
+        background: rgba(11, 61, 145, 0.2);
+        border-top: 1px solid rgba(65, 182, 230, 0.3);
+    }
+
+    footer p {
+        margin: 0.5rem 0;
+        color: var(--tech-teal);
+    }
+
+    /* Animation for satellite cards */
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0px); }
+    }
+
+    .satellite-card {
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .satellite-card:nth-child(2n) {
+        animation-delay: 1s;
+    }
+
+    .satellite-card:nth-child(3n) {
+        animation-delay: 2s;
+    }
+
+    /* Hero section */
+    .hero {
+        text-align: center;
+        padding: 4rem 2rem;
+        background: linear-gradient(rgba(5, 10, 28, 0.8), rgba(11, 61, 145, 0.5)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="white" opacity="0.6"/></svg>');
+        background-size: cover, 200px;
+        border-radius: 10px;
+        margin: 2rem auto;
+        max-width: 1200px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, transparent 20%, var(--space-blue) 90%);
+        animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .hero h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: var(--star-white);
+        font-family: 'Orbitron', sans-serif;
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+        max-width: 800px;
+        margin: 0 auto 2rem;
+        line-height: 1.6;
+        color: var(--tech-teal);
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .img-grid {
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         }
         
         header {
-            background-color: rgba(11, 61, 145, 0.8);
-            padding: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(5px);
-        }
-        
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
-            background: linear-gradient(to right, var(--tech-teal), var(--star-white));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 15px rgba(65, 182, 230, 0.7);
-            letter-spacing: 2px;
-        }
-        
-        #menu {
-            display: none;
-            background: var(--space-light);
-            color: var(--star-white);
-            border: 1px solid var(--tech-teal);
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            font-size: 1.5rem;
-            cursor: pointer;
+            flex-direction: column;
+            align-items: flex-start;
         }
         
         .navigation {
+            flex-direction: column;
+            gap: 0.5rem;
+            display: none;
+            width: 100%;
+        }
+        
+        .navigation.active {
             display: flex;
-            gap: 1.5rem;
-            margin-top: 1rem;
-            flex-basis: 100%;
         }
         
-        .navigation a {
-            color: var(--star-white);
-            text-decoration: none;
-            font-size: 1.1rem;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .navigation a:hover {
-            background: rgba(65, 182, 230, 0.2);
-            transform: translateY(-2px);
-        }
-        
-        .navigation a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--tech-teal);
-            transition: width 0.3s ease;
-        }
-        
-        .navigation a:hover::after {
-            width: 100%;
-        }
-        
-        main {
-            max-width: 1400px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
-        }
-        
-        main h2 {
-            text-align: center;
-            margin-bottom: 2rem;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            color: var(--tech-teal);
-            text-shadow: 0 0 10px rgba(65, 182, 230, 0.5);
-            position: relative;
-            padding-bottom: 1rem;
-        }
-        
-        main h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 150px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--tech-teal), transparent);
-        }
-        
-        .img-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .satellite-card {
-            background: rgba(29, 41, 81, 0.7);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(65, 182, 230, 0.3);
-        }
-        
-        .satellite-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(226, 125, 96, 0.4);
-            border-color: var(--mars-orange);
-        }
-        
-        .satellite-card img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
+        #menu {
             display: block;
-            border-bottom: 3px solid var(--tech-teal);
-        }
-        
-        .satellite-info {
-            padding: 1.5rem;
-        }
-        
-        .satellite-info h3 {
-            color: var(--tech-teal);
-            margin-bottom: 0.5rem;
-            font-size: 1.4rem;
-            font-family: 'Orbitron', sans-serif;
-        }
-        
-        .satellite-info p {
-            margin: 0.5rem 0;
-            line-height: 1.5;
-        }
-        
-        .mission-details {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(65, 182, 230, 0.3);
-        }
-        
-        .mission-details span {
-            background: rgba(65, 182, 230, 0.2);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
-            background: rgba(11, 61, 145, 0.2);
-            border-top: 1px solid rgba(65, 182, 230, 0.3);
-        }
-        
-        footer p {
-            margin: 0.5rem 0;
-            color: var(--tech-teal);
-        }
-        
-        /* Animation for satellite cards */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        .satellite-card {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        .satellite-card:nth-child(2n) {
-            animation-delay: 1s;
-        }
-        
-        .satellite-card:nth-child(3n) {
-            animation-delay: 2s;
-        }
-        
-        /* Hero section */
-        .hero {
-            text-align: center;
-            padding: 4rem 2rem;
-            background: linear-gradient(rgba(5, 10, 28, 0.8), rgba(11, 61, 145, 0.5)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="white" opacity="0.6"/></svg>');
-            background-size: cover, 200px;
-            border-radius: 10px;
-            margin: 2rem auto;
-            max-width: 1200px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero::before {
-            content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, transparent 20%, var(--space-blue) 90%);
-            animation: rotate 20s linear infinite;
+            top: 1.5rem;
+            right: 1.5rem;
         }
         
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        h1 {
+            font-size: 2rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .img-grid {
+            grid-template-columns: 1fr;
         }
         
-        .hero-content {
-            position: relative;
-            z-index: 2;
+        h1 {
+            font-size: 1.8rem;
         }
         
         .hero h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--star-white);
-            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
         }
-        
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            line-height: 1.6;
-            color: var(--tech-teal);
-        }
-        
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .img-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-            
-            header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .navigation {
-                flex-direction: column;
-                gap: 0.5rem;
-                display: none;
-                width: 100%;
-            }
-            
-            .navigation.active {
-                display: flex;
-            }
-            
-            #menu {
-                display: block;
-                position: absolute;
-                top: 1.5rem;
-                right: 1.5rem;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .img-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .hero h2 {
-                font-size: 2rem;
-            }
-        }
+    }

@@ -1,336 +1,19 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>火星轨道卫星图库</title>
-    <meta name="description" content="探索火星轨道上的人造卫星">
-    <meta name="author" content="DeepSeek AI">
+    <meta name="description" content="WDD133 - Final Project">
+    <meta name="author" content="Fong King Leong">
+    <title>Mars Orbital Satellites Gallery</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        :root {
-            --space-blue: #0b3d91;
-            --space-dark: #050a1c;
-            --space-light: #1d2951;
-            --mars-orange: #e27d60;
-            --tech-teal: #41b6e6;
-            --star-white: #f0f8ff;
-        }
-        
-        body {
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, var(--space-dark), var(--space-light));
-            color: var(--star-white);
-            min-height: 100vh;
-            padding-bottom: 2rem;
-            background-image: 
-                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 5px),
-                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 3px),
-                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 4px);
-            background-size: 550px 550px, 350px 350px, 250px 250px;
-            background-position: 0 0, 40px 60px, 130px 270px;
-        }
-        
-        header {
-            background-color: rgba(11, 61, 145, 0.8);
-            padding: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(5px);
-        }
-        
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
-            background: linear-gradient(to right, var(--tech-teal), var(--star-white));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 15px rgba(65, 182, 230, 0.7);
-            letter-spacing: 2px;
-        }
-        
-        #menu {
-            display: none;
-            background: var(--space-light);
-            color: var(--star-white);
-            border: 1px solid var(--tech-teal);
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
-        .navigation {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 1rem;
-            flex-basis: 100%;
-        }
-        
-        .navigation a {
-            color: var(--star-white);
-            text-decoration: none;
-            font-size: 1.1rem;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .navigation a:hover {
-            background: rgba(65, 182, 230, 0.2);
-            transform: translateY(-2px);
-        }
-        
-        .navigation a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--tech-teal);
-            transition: width 0.3s ease;
-        }
-        
-        .navigation a:hover::after {
-            width: 100%;
-        }
-        
-        main {
-            max-width: 1400px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
-        }
-        
-        main h2 {
-            text-align: center;
-            margin-bottom: 2rem;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            color: var(--tech-teal);
-            text-shadow: 0 0 10px rgba(65, 182, 230, 0.5);
-            position: relative;
-            padding-bottom: 1rem;
-        }
-        
-        main h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 150px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--tech-teal), transparent);
-        }
-        
-        .img-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .satellite-card {
-            background: rgba(29, 41, 81, 0.7);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(65, 182, 230, 0.3);
-        }
-        
-        .satellite-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(226, 125, 96, 0.4);
-            border-color: var(--mars-orange);
-        }
-        
-        .satellite-card img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            display: block;
-            border-bottom: 3px solid var(--tech-teal);
-        }
-        
-        .satellite-info {
-            padding: 1.5rem;
-        }
-        
-        .satellite-info h3 {
-            color: var(--tech-teal);
-            margin-bottom: 0.5rem;
-            font-size: 1.4rem;
-            font-family: 'Orbitron', sans-serif;
-        }
-        
-        .satellite-info p {
-            margin: 0.5rem 0;
-            line-height: 1.5;
-        }
-        
-        .mission-details {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(65, 182, 230, 0.3);
-        }
-        
-        .mission-details span {
-            background: rgba(65, 182, 230, 0.2);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
-            background: rgba(11, 61, 145, 0.2);
-            border-top: 1px solid rgba(65, 182, 230, 0.3);
-        }
-        
-        footer p {
-            margin: 0.5rem 0;
-            color: var(--tech-teal);
-        }
-        
-        /* Animation for satellite cards */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        .satellite-card {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        .satellite-card:nth-child(2n) {
-            animation-delay: 1s;
-        }
-        
-        .satellite-card:nth-child(3n) {
-            animation-delay: 2s;
-        }
-        
-        /* Hero section */
-        .hero {
-            text-align: center;
-            padding: 4rem 2rem;
-            background: linear-gradient(rgba(5, 10, 28, 0.8), rgba(11, 61, 145, 0.5)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="white" opacity="0.6"/></svg>');
-            background-size: cover, 200px;
-            border-radius: 10px;
-            margin: 2rem auto;
-            max-width: 1200px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, transparent 20%, var(--space-blue) 90%);
-            animation: rotate 20s linear infinite;
-        }
-        
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .hero h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--star-white);
-            font-family: 'Orbitron', sans-serif;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            line-height: 1.6;
-            color: var(--tech-teal);
-        }
-        
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .img-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-            
-            header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .navigation {
-                flex-direction: column;
-                gap: 0.5rem;
-                display: none;
-                width: 100%;
-            }
-            
-            .navigation.active {
-                display: flex;
-            }
-            
-            #menu {
-                display: block;
-                position: absolute;
-                top: 1.5rem;
-                right: 1.5rem;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .img-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .hero h2 {
-                font-size: 2rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/orbiter.css">
+    <script src="scripts/getdates.js" defer></script>
+    <script src="scripts/index.js" defer></script>
+
 </head>
 <body>
   <header>
@@ -340,110 +23,110 @@
     </div>
     <button id="menu">≡</button>
     <nav class="navigation">
-      <a href="#" class="active">全部卫星</a>
-      <a href="#">早期任务</a>
-      <a href="#">现代任务</a>
-      <a href="#">大型卫星</a>
-      <a href="#">小型探测器</a>
+      <a href="#" class="active">All Satellites</a>
+      <a href="#">Early Missions</a>
+      <a href="#">Modern Missions</a>
+      <a href="#">Large Satellites</a>
+      <a href="#">Small Probes</a>
     </nav>
   </header>
   
   <div class="hero">
     <div class="hero-content">
-      <h2>探索火星轨道</h2>
-      <p>自1960年代以来，人类已向火星发射了数十个轨道飞行器。这些工程奇迹扩展了我们对红色星球的认知，揭示了它的地质、大气和潜在宜居性的秘密。</p>
+      <h2>Exploring Mars Orbit</h2>
+      <p>Since the 1960s, humans have launched dozens of orbiters to Mars. These engineering marvels have expanded our understanding of the Red Planet, revealing its geology, atmosphere, and potential habitability secrets.</p>
     </div>
   </div>
   
   <main>
-    <h2>火星轨道卫星</h2>
+    <h2>Mars Orbital Satellites</h2>
     <div class="img-grid">
       <!-- Satellite 1 -->
       <div class="satellite-card">
-        <img src="https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931" alt="火星勘测轨道飞行器">
+        <img src="https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931" alt="Mars Reconnaissance Orbiter">
         <div class="satellite-info">
-          <h3>火星勘测轨道飞行器 (MRO)</h3>
-          <p>NASA于2005年发射，拥有迄今为止送往火星的最强大相机，分辨率可达0.3米/像素。</p>
+          <h3>Mars Reconnaissance Orbiter (MRO)</h3>
+          <p>Launched by NASA in 2005, it carries the most powerful camera ever sent to Mars, with a resolution of 0.3 meters per pixel.</p>
           <div class="mission-details">
-            <span>美国</span>
-            <span>2005-至今</span>
+            <span>USA</span>
+            <span>2005-Present</span>
           </div>
         </div>
       </div>
       
       <!-- Satellite 2 -->
       <div class="satellite-card">
-        <img src="https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931" alt="火星快车号">
+        <img src="https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931" alt="Mars Express">
         <div class="satellite-info">
-          <h3>火星快车号</h3>
-          <p>欧洲空间局首个火星探测任务，2003年发射，发现了火星地下水和甲烷的证据。</p>
+          <h3>Mars Express</h3>
+          <p>ESA's first Mars mission, launched in 2003, discovered evidence of subsurface water and methane on Mars.</p>
           <div class="mission-details">
-            <span>欧洲</span>
-            <span>2003-至今</span>
+            <span>Europe</span>
+            <span>2003-Present</span>
           </div>
         </div>
       </div>
       
       <!-- Satellite 3 -->
       <div class="satellite-card">
-        <img src="https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931" alt="火星奥德赛号">
+        <img src="https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931" alt="Mars Odyssey">
         <div class="satellite-info">
-          <h3>火星奥德赛号</h3>
-          <p>NASA长期运行的火星轨道器，2001年发射，已运行超过20年，发现了火星地表下的冰沉积物。</p>
+          <h3>Mars Odyssey</h3>
+          <p>NASA's long-running Mars orbiter, launched in 2001, has operated for over 20 years and discovered subsurface ice deposits.</p>
           <div class="mission-details">
-            <span>美国</span>
-            <span>2001-至今</span>
+            <span>USA</span>
+            <span>2001-Present</span>
           </div>
         </div>
       </div>
       
       <!-- Satellite 4 -->
       <div class="satellite-card">
-        <img src="https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931" alt="曼加里安号">
+        <img src="https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931" alt="Mangalyaan">
         <div class="satellite-info">
-          <h3>曼加里安号</h3>
-          <p>印度空间研究组织的首个火星任务，2013年发射，以极低成本成功进入火星轨道。</p>
+          <h3>Mangalyaan</h3>
+          <p>ISRO's first Mars mission, launched in 2013, successfully entered Mars orbit at an extremely low cost.</p>
           <div class="mission-details">
-            <span>印度</span>
-            <span>2013-至今</span>
+            <span>India</span>
+            <span>2013-Present</span>
           </div>
         </div>
       </div>
       
       <!-- Satellite 5 -->
       <div class="satellite-card">
-        <img src="https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931" alt="天问一号轨道器">
+        <img src="https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931" alt="Tianwen-1 Orbiter">
         <div class="satellite-info">
-          <h3>天问一号轨道器</h3>
-          <p>中国首次火星探测任务，2021年成功进入火星轨道，携带高分辨率相机和矿物光谱仪。</p>
+          <h3>Tianwen-1 Orbiter</h3>
+          <p>China's first Mars mission, successfully entered Mars orbit in 2021, carrying a high-resolution camera and mineral spectrometer.</p>
           <div class="mission-details">
-            <span>中国</span>
-            <span>2020-至今</span>
+            <span>China</span>
+            <span>2020-Present</span>
           </div>
         </div>
       </div>
       
       <!-- Satellite 6 -->
       <div class="satellite-card">
-        <img src="https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931" alt="希望号探测器">
+        <img src="https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931" alt="Hope Probe">
         <div class="satellite-info">
-          <h3>希望号探测器</h3>
-          <p>阿联酋首个行星际任务，2021年进入火星轨道，研究火星大气层和天气系统。</p>
+          <h3>Hope Probe</h3>
+          <p>UAE's first interplanetary mission, entered Mars orbit in 2021, studying Mars' atmosphere and weather systems.</p>
           <div class="mission-details">
-            <span>阿联酋</span>
-            <span>2020-至今</span>
+            <span>UAE</span>
+            <span>2020-Present</span>
           </div>
         </div>
       </div>
       
       <!-- Satellite 7 -->
       <div class="satellite-card">
-        <img src="https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931" alt="火星全球探勘者号">
+        <img src="https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931" alt="Mars Global Surveyor">
         <div class="satellite-info">
-          <h3>火星全球探勘者号</h3>
-          <p>NASA于1996年发射，运行至2006年，绘制了火星表面第一张全球高分辨率地图。</p>
+          <h3>Mars Global Surveyor</h3>
+          <p>Launched by NASA in 1996, operated until 2006, mapping the first global high-resolution map of Mars' surface.</p>
           <div class="mission-details">
-            <span>美国</span>
+            <span>USA</span>
             <span>1996-2006</span>
           </div>
         </div>
@@ -451,26 +134,26 @@
       
       <!-- Satellite 8 -->
       <div class="satellite-card">
-        <img src="https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931" alt="火星大气与挥发物演化任务">
+        <img src="https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931" alt="MAVEN">
         <div class="satellite-info">
-          <h3>火星大气与挥发物演化任务 (MAVEN)</h3>
-          <p>NASA于2013年发射，研究火星大气层如何随时间流失到太空。</p>
+          <h3>Mars Atmosphere and Volatile Evolution (MAVEN)</h3>
+          <p>Launched by NASA in 2013, studying how Mars' atmosphere has been lost to space over time.</p>
           <div class="mission-details">
-            <span>美国</span>
-            <span>2013-至今</span>
+            <span>USA</span>
+            <span>2013-Present</span>
           </div>
         </div>
       </div>
       
       <!-- Satellite 9 -->
       <div class="satellite-card">
-        <img src="https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931" alt="微量气体轨道飞行器">
+        <img src="https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931" alt="Trace Gas Orbiter">
         <div class="satellite-info">
-          <h3>微量气体轨道飞行器 (TGO)</h3>
-          <p>欧洲空间局和俄罗斯合作项目，2016年发射，研究火星大气中的微量气体。</p>
+          <h3>Trace Gas Orbiter (TGO)</h3>
+          <p>ESA-Roscosmos collaboration, launched in 2016, studying trace gases in Mars' atmosphere.</p>
           <div class="mission-details">
-            <span>欧洲/俄罗斯</span>
-            <span>2016-至今</span>
+            <span>Europe/Russia</span>
+            <span>2016-Present</span>
           </div>
         </div>
       </div>
@@ -478,37 +161,8 @@
   </main>
   
   <footer>    
-    <p> &copy; <span id="currentYear"></span> 🚀 火星轨道卫星图库 | 探索人类深空成就</p>
-    <p>数据更新至2023年12月</p>
+      <p> &copy;<span id="currentYear"></span>🚀 Fong King Leong 🏝️ Hong Kong</p>
+      <p id="lastModified"></p>
   </footer>
-  
-  <script>
-    // Update current year in footer
-    document.getElementById('currentYear').textContent = new Date().getFullYear();
-    
-    // Mobile menu toggle
-    const menuButton = document.getElementById('menu');
-    const navigation = document.querySelector('.navigation');
-    
-    menuButton.addEventListener('click', () => {
-      navigation.classList.toggle('active');
-    });
-    
-    // Add floating animation to satellite cards
-    const cards = document.querySelectorAll('.satellite-card');
-    cards.forEach((card, index) => {
-      card.style.animationDelay = `${index * 0.2}s`;
-    });
-    
-    // Add active class to navigation links
-    const navLinks = document.querySelectorAll('.navigation a');
-    navLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        navLinks.forEach(item => item.classList.remove('active'));
-        this.classList.add('active');
-      });
-    });
-  </script>
 </body>
 </html>
