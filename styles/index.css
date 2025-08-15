@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>火星探索 - 人类探索红色星球的旅程</title>
-    <meta name="description" content="探索火星登陆器、轨道卫星及各国太空机构的火星探索成就">
-    <meta name="author" content="DeepSeek AI">
-    <style>
-        :root {
+:root {
             --space-dark: #050a1c;
             --space-blue: #0b3d91;
             --space-light: #1d2951;
@@ -39,10 +30,10 @@
             background-position: 0 0, 40px 60px, 130px 270px;
         }
         
-        /* 页头样式 */
+        /* Header styles */
         header {
             background-color: rgba(11, 61, 145, 0.8);
-            padding: 1.5rem;
+            padding: 1rem 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -52,6 +43,17 @@
             top: 0;
             z-index: 100;
             backdrop-filter: blur(5px);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo {
+            height: 80px;
+            width: auto;
         }
         
         h1 {
@@ -119,7 +121,7 @@
             border-bottom: 2px solid var(--tech-teal);
         }
         
-        /* 主内容区 */
+        /* Main content */
         main {
             max-width: 1400px;
             margin: 2rem auto;
@@ -148,11 +150,12 @@
             background: linear-gradient(90deg, transparent, var(--tech-teal), transparent);
         }
         
-        /* 英雄区域 */
+        /* Hero section */
         .hero {
             text-align: center;
             padding: 4rem 2rem;
-            background: linear-gradient(rgba(5, 10, 28, 0.8), rgba(11, 61, 145, 0.5)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="white" opacity="0.6"/></svg>');
+            background: url('../images/mars.png')
+                center / cover no-repeat;
             background-size: cover, 200px;
             border-radius: 10px;
             margin: 2rem auto;
@@ -197,7 +200,7 @@
             color: var(--tech-teal);
         }
         
-        /* 探索卡片 */
+        /* Exploration cards */
         .explore-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -270,7 +273,7 @@
             transform: scale(1.05);
         }
         
-        /* 太空机构网格 */
+        /* Space agencies grid */
         .agency-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -298,7 +301,7 @@
         
         .agency-card img {
             width: 100%;
-            height: 180px;
+            height: 200px;
             object-fit: contain;
             display: block;
             padding: 1.5rem;
@@ -339,7 +342,7 @@
             transform: scale(1.05);
         }
         
-        /* 页脚 */
+        /* Footer */
         footer {
             text-align: center;
             padding: 2rem;
@@ -353,7 +356,7 @@
             color: var(--tech-teal);
         }
         
-        /* 动画 */
+        /* Animations */
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
@@ -372,7 +375,7 @@
             animation-delay: 2s;
         }
         
-        /* 响应式设计 */
+        /* Responsive design */
         @media (max-width: 768px) {
             .explore-cards, .agency-grid {
                 grid-template-columns: 1fr;
@@ -383,9 +386,13 @@
                 align-items: flex-start;
             }
             
+            .logo-container {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
             h1 {
                 font-size: 2rem;
-                margin-bottom: 1rem;
             }
             
             .navigation {
@@ -401,9 +408,9 @@
             
             #menu {
                 display: block;
-                position: absolute;
-                top: 1.5rem;
-                right: 1.5rem;
+                position: relative;
+                top: auto;
+                right: auto;
             }
             
             .hero h2 {
@@ -424,113 +431,3 @@
                 font-size: 1rem;
             }
         }
-    </style>
-</head>
-<body>
-  <header>
-    <h1>火星探索</h1>
-    <button id="menu">≡</button>
-    <nav class="navigation">
-      <a href="#" class="active">首页</a>
-      <a href="rover.html">登陆器</a>
-      <a href="orbiter.html">轨道器</a>
-      <a href="agencies.html">太空机构</a>
-    </nav>
-  </header>
-  
-  <div class="hero">
-    <div class="hero-content">
-      <h2>探索红色星球</h2>
-      <p>火星，人类太空探索的下一个前沿。自20世纪60年代以来，人类已向火星发送了数十个探测任务，揭示了这颗红色星球的秘密。探索登陆火星表面的探测器、环绕火星的轨道卫星以及推动这些探索的太空机构。</p>
-    </div>
-  </div>
-  
-  <main>
-    <h2>探索火星任务</h2>
-    
-    <div class="explore-cards">
-      <div class="explore-card">
-        <img src="https://images.unsplash.com/photo-1603574670812-d24560880210?q=80&w=1935" alt="火星登陆器">
-        <div class="explore-info">
-          <h3>火星登陆器</h3>
-          <p>从早期的火星3号到现代的好奇号和祝融号，登陆器让我们能够直接在火星表面进行研究。这些工程奇迹帮助我们了解火星的地质、气候和潜在宜居性。</p>
-          <a href="rover.html" class="explore-btn">探索登陆器</a>
-        </div>
-      </div>
-      
-      <div class="explore-card">
-        <img src="https://images.unsplash.com/photo-1457364887197-9150188c107b?q=80&w=2070" alt="火星轨道器">
-        <div class="explore-info">
-          <h3>火星轨道器</h3>
-          <p>环绕火星运行的轨道卫星提供了全球视角，帮助我们绘制火星地图、研究大气层并作为地面探测器的通信中继。从NASA的MRO到中国的天问一号轨道器，这些任务改变了我们对火星的认识。</p>
-          <a href="orbiter.html" class="explore-btn">探索轨道器</a>
-        </div>
-      </div>
-      
-      <div class="explore-card">
-        <img src="https://images.unsplash.com/photo-1505506874110-6a7a69069a08?q=80&w=1887" alt="太空机构">
-        <div class="explore-info">
-          <h3>太空机构</h3>
-          <p>探索推动火星任务的各国太空机构。从NASA和ESA到CNSA和ISRO，了解这些组织如何合作与竞争，共同推进人类对红色星球的探索。</p>
-          <a href="agencies.html" class="explore-btn">探索机构</a>
-        </div>
-      </div>
-    </div>
-    
-    <h2>主要太空机构</h2>
-    
-    <div class="agency-grid">
-      <div class="agency-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/NASA_logo.svg/800px-NASA_logo.svg.png" alt="NASA">
-        <div class="agency-info">
-          <h3>NASA</h3>
-          <p>美国国家航空航天局，火星探索的领导者，已成功完成多次火星任务。</p>
-          <a href="https://www.nasa.gov" target="_blank" class="agency-link">访问官网</a>
-        </div>
-      </div>
-      
-      <div class="agency-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/CNSA_logo.svg/1200px-CNSA_logo.svg.png" alt="CNSA">
-        <div class="agency-info">
-          <h3>CNSA</h3>
-          <p>中国国家航天局，近年来在火星探索方面取得显著成就，包括天问一号任务。</p>
-          <a href="https://www.cnsa.gov.cn" target="_blank" class="agency-link">访问官网</a>
-        </div>
-      </div>
-      
-      <div class="agency-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/ESA_logo.svg/1200px-ESA_logo.svg.png" alt="ESA">
-        <div class="agency-info">
-          <h3>ESA</h3>
-          <p>欧洲航天局，通过火星快车号等任务为火星探索做出重要贡献。</p>
-          <a href="https://www.esa.int" target="_blank" class="agency-link">访问官网</a>
-        </div>
-      </div>
-    </div>
-  </main>
-  
-  <footer>    
-    <p> &copy; <span id="currentYear"></span> 🚀 火星探索 | 人类深空探索的里程碑</p>
-    <p>数据更新至2023年12月</p>
-  </footer>
-  
-  <script>
-    // 更新页脚年份
-    document.getElementById('currentYear').textContent = new Date().getFullYear();
-    
-    // 移动菜单切换
-    const menuButton = document.getElementById('menu');
-    const navigation = document.querySelector('.navigation');
-    
-    menuButton.addEventListener('click', () => {
-      navigation.classList.toggle('active');
-    });
-    
-    // 添加浮动动画到卡片
-    const cards = document.querySelectorAll('.explore-card, .agency-card');
-    cards.forEach((card, index) => {
-      card.style.animationDelay = `${index * 0.2}s`;
-    });
-  </script>
-</body>
-</html>

@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>火星登陆器图库</title>
+    <meta name="description" content="探索火星登陆器的历史与成就">
+    <meta name="author" content="DeepSeek AI">
+    <style>
+        /* 太空主题样式 */
+        :root {
+            --space-dark: #050a1c;
+            --space-blue: #0b3d91;
+            --space-light: #1d2951;
+            --mars-orange: #e27d60;
+            --tech-teal: #41b6e6;
+            --star-white: #f0f8ff;
+            --success-green: #4caf50;
+            --failure-red: #f44336;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, var(--space-dark), var(--space-light));
+            color: var(--star-white);
+            min-height: 100vh;
+            padding-bottom: 2rem;
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 5px),
+                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 3px),
+                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 4px);
+            background-size: 550px 550px, 350px 350px, 250px 250px;
+            background-position: 0 0, 40px 60px, 130px 270px;
+        }
+        
+        /* 页头样式 */
+        header {
+            background-color: rgba(11, 61, 145, 0.8);
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+        
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            background: linear-gradient(to right, var(--tech-teal), var(--star-white));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px rgba(65, 182, 230, 0.7);
+            letter-spacing: 2px;
+        }
+        
+        #menu {
+            display: none;
+            background: var(--space-light);
+            color: var(--star-white);
+            border: 1px solid var(--tech-teal);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .navigation {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            flex-basis: 100%;
+        }
+        
+        .navigation a {
+            color: var(--star-white);
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .navigation a:hover {
+            background: rgba(65, 182, 230, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .navigation a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--tech-teal);
+            transition: width 0.3s ease;
+        }
+        
+        .navigation a:hover::after {
+            width: 100%;
+        }
+        
+        .active {
+            background: rgba(65, 182, 230, 0.3);
+            border-bottom: 2px solid var(--tech-teal);
+        }
+        
+        /* 主内容区 */
+        main {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        main h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: var(--tech-teal);
+            text-shadow: 0 0 10px rgba(65, 182, 230, 0.5);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        main h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--tech-teal), transparent);
+        }
+        
+        /* 登陆器网格 */
+        .lander-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .lander-card {
+            background: rgba(29, 41, 81, 0.7);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(65, 182, 230, 0.3);
+            position: relative;
+        }
+        
+        .lander-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(226, 125, 96, 0.4);
+            border-color: var(--mars-orange);
+        }
+        
+        .status-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            z-index: 10;
+        }
+        
+        .success {
+            background-color: var(--success-green);
+        }
+        
+        .failure {
+            background-color: var(--failure-red);
+        }
+        
+        .lander-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            border-bottom: 3px solid var(--tech-teal);
+        }
+        
+        .lander-info {
+            padding: 1.5rem;
+        }
+        
+        .lander-info h3 {
+            color: var(--tech-teal);
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .lander-info p {
+            margin: 0.5rem 0;
+            line-height: 1.5;
+        }
+        
+        .mission-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(65, 182, 230, 0.3);
+        }
+        
+        .mission-details span {
+            background: rgba(65, 182, 230, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        
+        /* 英雄区域 */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(rgba(5, 10, 28, 0.8), rgba(11, 61, 145, 0.5)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="white" opacity="0.6"/></svg>');
+            background-size: cover, 200px;
+            border-radius: 10px;
+            margin: 2rem auto;
+            max-width: 1200px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, transparent 20%, var(--space-blue) 90%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--star-white);
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+            color: var(--tech-teal);
+        }
+        
+        /* 页脚 */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            background: rgba(11, 61, 145, 0.2);
+            border-top: 1px solid rgba(65, 182, 230, 0.3);
+        }
+        
+        footer p {
+            margin: 0.5rem 0;
+            color: var(--tech-teal);
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .lander-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 0.5rem;
+                display: none;
+                width: 100%;
+            }
+            
+            .navigation.active {
+                display: flex;
+            }
+            
+            #menu {
+                display: block;
+                position: absolute;
+                top: 1.5rem;
+                right: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .lander-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+  <header>
+    <h1>火星登陆器图库</h1>
+    <button id="menu">≡</button>
+    <nav class="navigation">
+      <a href="#" class="active">全部登陆器</a>
+      <a href="#">早期任务</a>
+      <a href="#">现代任务</a>
+      <a href="#">大型登陆器</a>
+      <a href="#">小型登陆器</a>
+    </nav>
+  </header>
+  
+  <div class="hero">
+    <div class="hero-content">
+      <h2>探索红色星球</h2>
+      <p>自1971年首次尝试以来，人类已向火星表面发送了多个登陆器。这些工程奇迹扩展了我们对红色星球的认知，揭示了它的地质、大气和潜在宜居性的秘密。</p>
+    </div>
+  </div>
+  
+  <main>
+    <h2>火星登陆器</h2>
+    <div class="lander-grid">
+      <!-- 登陆器卡片将通过JavaScript动态生成 -->
+    </div>  
+  </main>
+  
+  <footer>    
+    <p> &copy; <span id="currentYear"></span> 🚀 火星登陆器图库 | 探索人类深空成就</p>
+    <p>数据更新至2023年12月</p>
+  </footer>
+  
+  <script>
+    // 火星登陆器数据
+    const landers = [
+      {
+        name: "火星3号",
+        country: "苏联",
+        date: "1971, 12, 2",
+        weight: 1210,
+        type: "固定式着陆器",
+        status: "failure",
+        description: "第一个成功软着陆火星的探测器，但着陆后仅工作14.5秒即失联",
+        imageUrl: "https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931"
+      },
+      {
+        name: "海盗1号",
+        country: "美国",
+        date: "1976, 7, 20",
+        weight: 576,
+        type: "固定式着陆器",
+        status: "success",
+        description: "第一个成功在火星表面工作并传回数据的着陆器，工作了6年多",
+        imageUrl: "https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931"
+      },
+      {
+        name: "海盗2号",
+        country: "美国",
+        date: "1976, 9, 3",
+        weight: 576,
+        type: "固定式着陆器",
+        status: "success",
+        description: "在火星表面工作了3年多，进行了大量科学实验",
+        imageUrl: "https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931"
+      },
+      {
+        name: "火星探路者",
+        country: "美国",
+        date: "1997, 7, 4",
+        weight: 264,
+        type: "着陆器+漫游车",
+        status: "success",
+        description: "携带了旅居者号漫游车，首次在火星上实现漫游车行驶",
+        imageUrl: "https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931"
+      },
+      {
+        name: "勇气号",
+        country: "美国",
+        date: "2004, 1, 4",
+        weight: 185,
+        type: "漫游车",
+        status: "success",
+        description: "设计寿命90天，实际工作了6年多，行驶7.73公里",
+        imageUrl: "https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931"
+      },
+      {
+        name: "机遇号",
+        country: "美国",
+        date: "2004, 1, 25",
+        weight: 185,
+        type: "漫游车",
+        status: "success",
+        description: "设计寿命90天，实际工作了15年，行驶45.16公里",
+        imageUrl: "https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931"
+      },
+      {
+        name: "凤凰号",
+        country: "美国",
+        date: "2008, 5, 25",
+        weight: 350,
+        type: "固定式着陆器",
+        status: "success",
+        description: "在火星北极地区着陆，首次证实火星存在水冰",
+        imageUrl: "https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931"
+      },
+      {
+        name: "好奇号",
+        country: "美国",
+        date: "2012, 8, 6",
+        weight: 899,
+        type: "漫游车",
+        status: "success",
+        description: "核动力火星车，仍在工作中，已行驶超过28公里",
+        imageUrl: "https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931"
+      },
+      {
+        name: "洞察号",
+        country: "美国",
+        date: "2018, 11, 26",
+        weight: 358,
+        type: "固定式着陆器",
+        status: "success",
+        description: "研究火星内部结构，首次测量火星地震",
+        imageUrl: "https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931"
+      },
+      {
+        name: "祝融号",
+        country: "中国",
+        date: "2021, 5, 15",
+        weight: 240,
+        type: "漫游车",
+        status: "success",
+        description: "中国首个火星车，在乌托邦平原探测",
+        imageUrl: "https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931"
+      },
+      {
+        name: "火星2号",
+        country: "苏联",
+        date: "1971, 11, 27",
+        weight: 1210,
+        type: "固定式着陆器",
+        status: "failure",
+        description: "首个尝试软着陆火星的探测器，但坠毁在火星表面",
+        imageUrl: "https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931"
+      },
+      {
+        name: "火星6号",
+        country: "苏联",
+        date: "1974, 3, 12",
+        weight: 635,
+        type: "固定式着陆器",
+        status: "failure",
+        description: "在着陆过程中失去联系，未能传回有效数据",
+        imageUrl: "https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931"
+      },
+      {
+        name: "小猎犬2号",
+        country: "欧洲",
+        date: "2003, 12, 25",
+        weight: 69,
+        type: "固定式着陆器",
+        status: "failure",
+        description: "成功着陆但未能完全展开太阳能电池板",
+        imageUrl: "https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931"
+      },
+      {
+        name: "斯基亚帕雷利EDM登陆器",
+        country: "欧洲",
+        date: "2016, 10, 19",
+        weight: 577,
+        type: "固定式着陆器",
+        status: "failure",
+        description: "着陆过程中导航系统错误导致坠毁",
+        imageUrl: "https://images.unsplash.com/photo-1635863138275-d9b33299680a?q=80&w=1931"
+      }
+    ];
+
+    // DOM元素
+    const menuButton = document.getElementById('menu');
+    const navigation = document.querySelector('.navigation');
+    const landerGrid = document.querySelector('.lander-grid');
+    const navLinks = document.querySelectorAll('.navigation a');
+    const pageHeader = document.querySelector('main h2');
+    const allLink = navLinks[0];
+    const oldLink = navLinks[1];
+    const newLink = navLinks[2];
+    const largeLink = navLinks[3];
+    const smallLink = navLinks[4];
+
+    // 更新页脚年份
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+    
+    // 创建登陆器卡片
+    function createLanderCards(landerList) {
+      landerGrid.innerHTML = '';
+      
+      landerList.forEach(lander => {
+        const card = document.createElement('div');
+        card.className = 'lander-card';
+        
+        const statusClass = lander.status === 'success' ? 'success' : 'failure';
+        const statusText = lander.status === 'success' ? '成功' : '失败';
+        
+        card.innerHTML = `
+          <div class="status-badge ${statusClass}">${statusText}</div>
+          <img src="${lander.imageUrl}" alt="${lander.name}">
+          <div class="lander-info">
+            <h3>${lander.name}</h3>
+            <p>${lander.description}</p>
+            <p><strong>国家:</strong> ${lander.country}</p>
+            <p><strong>类型:</strong> ${lander.type}</p>
+            <div class="mission-details">
+              <span>${lander.date.split(',')[0]}年</span>
+              <span>${lander.weight} kg</span>
+            </div>
+          </div>
+        `;
+        
+        landerGrid.appendChild(card);
+      });
+    }
+    
+    // 过滤函数
+    function filterSmall() {
+      return landers.filter(lander => lander.weight < 300);
+    }
+    
+    function filterLarge() {
+      return landers.filter(lander => lander.weight > 500);
+    }
+    
+    function filterOld() {
+      return landers.filter(lander => parseInt(lander.date.split(',')[0]) < 2000);
+    }
+    
+    function filterNew() {
+      return landers.filter(lander => parseInt(lander.date.split(',')[0]) >= 2000);
+    }
+    
+    // 事件监听器
+    menuButton.addEventListener('click', () => {
+      navigation.classList.toggle('active');
+    });
+    
+    allLink.addEventListener('click', () => {
+      navLinks.forEach(link => link.classList.remove('active'));
+      allLink.classList.add('active');
+      pageHeader.textContent = '全部登陆器';
+      createLanderCards(landers);
+    });
+    
+    oldLink.addEventListener('click', () => {
+      navLinks.forEach(link => link.classList.remove('active'));
+      oldLink.classList.add('active');
+      pageHeader.textContent = '早期任务';
+      createLanderCards(filterOld());
+    });
+    
+    newLink.addEventListener('click', () => {
+      navLinks.forEach(link => link.classList.remove('active'));
+      newLink.classList.add('active');
+      pageHeader.textContent = '现代任务';
+      createLanderCards(filterNew());
+    });
+    
+    largeLink.addEventListener('click', () => {
+      navLinks.forEach(link => link.classList.remove('active'));
+      largeLink.classList.add('active');
+      pageHeader.textContent = '大型登陆器';
+      createLanderCards(filterLarge());
+    });
+    
+    smallLink.addEventListener('click', () => {
+      navLinks.forEach(link => link.classList.remove('active'));
+      smallLink.classList.add('active');
+      pageHeader.textContent = '小型登陆器';
+      createLanderCards(filterSmall());
+    });
+    
+    // 初始加载
+    createLanderCards(landers);
+  </script>
+</body>
+</html>
+

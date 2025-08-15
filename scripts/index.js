@@ -10,20 +10,19 @@ currentYear.innerHTML = currentDate.getFullYear();
 lastModified.innerHTML = `Last Modification: ${lastModDate.getMonth() + 1}/${lastModDate.getDate()}/${lastModDate.getFullYear()} ${lastModDate.getHours()}:${lastModDate.getMinutes()}:${lastModDate.getSeconds()}`;
 
 
-//header function***
-function openCity(cityName, elmnt, color) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablink");
-    for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].style.backgroundColor = "";
-    }
-    document.getElementById(cityName).style.display = "block";
-    elmnt.style.backgroundColor = color;
+// Update footer year
+document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-}
-// Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
+// Mobile menu toggle
+const menuButton = document.getElementById('menu');
+const navigation = document.querySelector('.navigation');
+
+menuButton.addEventListener('click', () => {
+    navigation.classList.toggle('active');
+});
+
+// Add floating animation to cards
+const cards = document.querySelectorAll('.explore-card, .agency-card');
+cards.forEach((card, index) => {
+    card.style.animationDelay = `${index * 0.2}s`;
+});
