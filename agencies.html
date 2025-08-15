@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mars Exploration - Humanity's Journey to the Red Planet</title>
+    <meta name="description" content="WDD133 - Final Project">
+    <meta name="author" content="Fong King Leong">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/index.css">
+    <script src="scripts/getdates.js" defer></script>
+    <script src="scripts/index.js" defer></script>
+
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="images/marsrover.png" alt="Mars Exploration Logo" class="logo">
+      <h1>Mars Exploration</h1>
+    </div>
+    <button id="menu">≡</button>
+    <nav class="navigation">
+      <a href="#" class="active">Home</a>
+      <a href="rover.html">Landers</a>
+      <a href="orbiter.html">Orbiters</a>
+      <a href="agencies.html">Space Agencies</a>
+    </nav>
+  </header>
+  
+  <div class="hero">
+    <div class="hero-content">
+      <h2>Exploring the Red Planet</h2>
+      <p>Mars, humanity's next frontier in space exploration. Since the 1960s, dozens of missions have been sent to Mars, revealing the secrets of this red world. Explore the landers on Mars' surface, the orbiters circling above, and the space agencies driving these discoveries.</p>
+    </div>
+  </div>
+  
+  <main>
+    <h2>Major Space Agencies</h2>
+        
+        <div class="agency-grid">
+          <div class="agency-card">
+            <img src="images/nasa-logo.png" alt="NASA">
+            <div class="agency-info">
+              <h3>NASA</h3>
+              <p>National Aeronautics and Space Administration, leader in Mars exploration with multiple successful missions.</p>
+              <a href="https://www.nasa.gov" target="_blank" class="agency-link">Official Site</a>
+            </div>
+          </div>
+          
+          <div class="agency-card">
+            <img src="images/cnsa-logo.png" alt="CNSA">
+            <div class="agency-info">
+              <h3>CNSA</h3>
+              <p>China National Space Administration, achieving remarkable success recently with the Tianwen-1 mission.</p>
+              <a href="https://www.cnsa.gov.cn" target="_blank" class="agency-link">Official Site</a>
+            </div>
+          </div>
+          
+          <div class="agency-card">
+            <img src="images/esa-logo.png" alt="ESA">
+            <div class="agency-info">
+              <h3>ESA</h3>
+              <p>European Space Agency, contributing significantly to Mars exploration with missions like Mars Express.</p>
+              <a href="https://www.esa.int" target="_blank" class="agency-link">Official Site</a>
+            </div>
+          </div>
+        </div>
+  </main>
+
+  <footer>    
+      <p> &copy;<span id="currentYear"></span>🚀 Fong King Leong 🏝️ Hong Kong</p>
+      <p id="lastModified"></p>
+  </footer>
+</body>
+</html>
